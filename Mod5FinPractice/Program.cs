@@ -11,7 +11,7 @@ namespace Mod5FinPractice
         }
         static (string name, string lastName, int age, bool pet, int petQuant, string[] petName, string[] favColors) Form()
         {
-            (string name, string lastName, int age, bool pet, int petQuant, string[] petName, string[] favColors) anketa;
+            (string name, string lastName, int age, bool pet, int petQuant, string[] petName, string[] favColors) anketa = ("","",0,false,0,new string[0], new string[0]);
             Console.WriteLine("Введите ваше имя:");
             anketa.name = Console.ReadLine();
             Console.WriteLine("Введите вашу фамилию:");
@@ -51,7 +51,7 @@ namespace Mod5FinPractice
         static string[] PetArray(int num) 
         {
             string[] petname = new string[num];
-            for (int i = 0; i <= petname.Length; i++)
+            for (int i = 0; i < petname.Length; i++)
             {
                 Console.WriteLine("Введите имя питомца:");
                 petname[i] = Console.ReadLine();
@@ -61,7 +61,7 @@ namespace Mod5FinPractice
         static string[] Colors(int num) 
         {
             string[] favColors = new string[num];
-            for (int i = 0; i <= favColors.Length; i++)
+            for (int i = 0; i < favColors.Length; i++)
             {
                 Console.WriteLine("Введите любимый цвет:");
                 favColors[i] = Console.ReadLine();
@@ -86,6 +86,26 @@ namespace Mod5FinPractice
                 Console.WriteLine(item);
             }
             
+        }
+        static int CheckNumber(string num1) 
+        { 
+            num1 = Console.ReadLine();
+            int corrnumb;
+            bool result = int.TryParse(num1, out corrnumb);
+            do
+            {
+                if (result)
+                {
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Введены некорректные данные, пожалуйста используйте цифры для ввода");
+                    Console.WriteLine("Повторите ввод");
+                    num1 = Console.ReadLine();
+                }
+            }while (result == false);
+            return corrnumb;
         }
     }
 }
