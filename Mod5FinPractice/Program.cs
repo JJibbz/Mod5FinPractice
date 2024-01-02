@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Threading.Channels;
 
 namespace Mod5FinPractice
 {
@@ -17,9 +18,11 @@ namespace Mod5FinPractice
             Console.WriteLine("Введите вашу фамилию:");
             anketa.lastName = Console.ReadLine();
             Console.WriteLine("Введите ваш возраст цифрами:");
-            anketa.age = Convert.ToInt32(Console.ReadLine());
+            string age = Console.ReadLine();
+            anketa.age = CheckNumber(age);
             Console.WriteLine("Введите количество любимых цветов цифрами:");
-            int colorQuant = Convert.ToInt32(Console.ReadLine());
+            string colors = Console.ReadLine();
+            int colorQuant = CheckNumber(colors);
             anketa.favColors = Colors(colorQuant);
             Console.WriteLine("Есть ли у вас питомцы? Если есть введите 1, иначе введите 0");
             int a = Convert.ToInt32(Console.ReadLine());
@@ -29,7 +32,8 @@ namespace Mod5FinPractice
                 if (anketa.pet == true)
                 {
                     Console.WriteLine("Введите количество ваших питомцев цифрами:");
-                    anketa.petQuant = Convert.ToInt32(Console.ReadLine());
+                    string pets = Console.ReadLine();
+                    anketa.petQuant = CheckNumber(pets);
                     anketa.petName = PetArray(anketa.petQuant);
                
                 }
@@ -89,23 +93,22 @@ namespace Mod5FinPractice
         }
         static int CheckNumber(string num1) 
         { 
-            num1 = Console.ReadLine();
             int corrnumb;
             bool result = int.TryParse(num1, out corrnumb);
-            do
-            {
-                if (result)
+            
+                if (result == true)
                 {
-                    
+                    return corrnumb; 
                 }
                 else
                 {
-                    Console.WriteLine("Введены некорректные данные, пожалуйста используйте цифры для ввода");
-                    Console.WriteLine("Повторите ввод");
-                    num1 = Console.ReadLine();
+                 Console.WriteLine("Введены некорректные данные, пожалуйста используйте цифры для ввода");
+                 Console.WriteLine("Повторите ввод");
+                 num1 = Console.ReadLine();
+                 int correct = CheckNumber(num1);
+                 return correct;
                 }
-            }while (result == false);
-            return corrnumb;
+            
         }
     }
 }
